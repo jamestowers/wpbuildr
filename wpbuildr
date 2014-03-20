@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # wpbuildr by Aaron Holbrook (@aaronjholbrook)
-# 
+#
 # This script was created to cut down on the amount of time it takes
 # to get a local install of WordPress up and running by automating the
 # things we do over and over: download WordPress, create a database, run the
@@ -57,7 +57,7 @@ else
 fi
 
 
-# See if there's a config file, if not offer to create one based on the options the 
+# See if there's a config file, if not offer to create one based on the options the
 # user chooses during the setup
 # if [ ! -e "$dir/conf/config.conf" ]; then
 #   read -p 'Would you like to save your config for next time? [Y/n]' response
@@ -74,7 +74,7 @@ fi
 #     echo "Detected a config file, using those defaults."
 # fi
 
-# Build our theme from a framework? 
+# Build our theme from a framework?
 if [ ! $2 ]; then
   echo "What theme framework would you like to use?"
   read -p "Options: [blueox, _s, startbox, starkers, html5, bones, custom, none]: " framework
@@ -82,7 +82,7 @@ fi
 
 
 # Create html directory (todo: customizable structure)
-mkdir html; cd html
+mkdir $project; cd $project
 
 
 # Init git repo and do an empty initial commit (for rebasing, thanks @evansolomon)
@@ -127,15 +127,15 @@ git commit -q -m "Installed WordPress core files."
 if [ "$framework" == "none" ] || [ "$framework" == "" ]; then
   framework_repo="none"
 elif [ "$framework" == "blueox" ]; then
-  framework_repo="git://github.com/AaronHolbrook/blueox.git"  
+  framework_repo="git://github.com/AaronHolbrook/blueox.git"
 elif [ "$framework" == "_s" ]; then
   framework_repo="git://github.com/Automattic/_s.git"
 elif [ "$framework" == "starkers" ]; then
   framework_repo="git://github.com/viewportindustries/starkers.git"
 elif [ "$framework" == "html5" ]; then
-  framework_repo="git://github.com/murtaugh/HTML5-Reset-Wordpress-Theme.git"  
+  framework_repo="git://github.com/murtaugh/HTML5-Reset-Wordpress-Theme.git"
 elif [ "$framework" == "startbox" ]; then
-  framework_repo="git://github.com/WebDevStudios/StartBox.git"  
+  framework_repo="git://github.com/WebDevStudios/StartBox.git"
 elif [ "$framework" == "bones" ]; then
   framework_repo="git://github.com/eddiemachado/bones.git"
 elif [ "$framework" == "roots" ]; then
@@ -145,7 +145,7 @@ elif [ "$framework" == "custom" ]; then
 fi
 
 
-  
+
 echo '------------------------------------------------------------------------'
 echo '---> DOWNLOADING THEME'
 echo '------------------------------------------------------------------------'
@@ -185,7 +185,7 @@ rm hello.php
 
 # Install plugins that are listed in the plugins.conf file
 # To add your/modify the plugins that are installed simply
-# Change the plugins file to contain the slug of the plugins you want! 
+# Change the plugins file to contain the slug of the plugins you want!
 for plugin in `cat $dir/conf/plugins.conf`; do
   echo "Installing: $plugin..."
   mkdir $plugin; cd $plugin
@@ -205,7 +205,7 @@ echo "<?php // mu-plugins/load.php" > load.php;
 
 # Install plugins that are listed in the mu-plugins.conf file
 # To add your/modify the plugins that are installed simply
-# Change the plugins file to contain the slug of the plugins you want! 
+# Change the plugins file to contain the slug of the plugins you want!
 for plugin in `cat $dir/conf/mu-plugins.conf`; do
   echo "Installing: $plugin..."
   mkdir $plugin; cd $plugin
@@ -250,8 +250,8 @@ echo "<?php
 // For local development - make sure to add wp-config.local.php to your .gitignore file - this file should NOT be on the production server
 if ( file_exists( dirname( __FILE__ ) . '/wp-config.local.php' ) ) {
   include( dirname( __FILE__ ) . '/wp-config.local.php' );
-  define( 'WP_LOCAL_DEV', true ); 
-} 
+  define( 'WP_LOCAL_DEV', true );
+}
 else {
 
   // ** MySQL settings - You can get this info from your web host ** //
@@ -266,7 +266,7 @@ else {
 
   /** MySQL hostname */
   define('DB_HOST', '');
-  
+
   define('WP_CACHE', true);
 
 
@@ -287,7 +287,7 @@ else {
    * You can have multiple installations in one database if you give each a unique
    * prefix. Only numbers, letters, and underscores please!
    */
-  \$table_prefix  = 'wp_${config_values["project_name"]}_'; 
+  \$table_prefix  = 'wp_${config_values["project_name"]}_';
 
 }
 
@@ -405,5 +405,3 @@ echo '------------------------------------------------------------------------'
 echo '---> WPBUILDR COMPLETE'
 echo '------------------------------------------------------------------------'
 echo ''
-
-
