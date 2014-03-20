@@ -26,14 +26,6 @@ echo '   '
 echo "wpbuildr - an Aaron Holbrook Production"
 echo ''
 
-# create the html for site-root (to mimic MT, possibly look at allowing other structures)
-# if html dir exists, exit - let's not break anything!
-if [ -d "html" ]; then
-  echo "Oops, looks like you already have an html directory here! To protect your files, WP Buildr will now quit. If you meant to run it here, just rename/remove your existing html folder, and it will run."
-  echo "exiting..."
-  exit
-fi
-
 
 # See if the user wants to use Git
 #read -p "Would you like to use Git? [Y/n] " git
@@ -56,6 +48,13 @@ else
   project=$1
 fi
 
+# create the html for site-root (to mimic MT, possibly look at allowing other structures)
+# if html dir exists, exit - let's not break anything!
+if [ -d $project ]; then
+  echo "Oops, looks like you already have a site called "$project"! To protect your files, WP Buildr will now quit. If you meant to run it here, just rename/remove your existing "$project" folder, and it will run."
+  echo "exiting..."
+  exit
+fi
 
 # See if there's a config file, if not offer to create one based on the options the
 # user chooses during the setup
