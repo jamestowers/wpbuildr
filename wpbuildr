@@ -159,13 +159,12 @@ if [ "$framework_repo" != "none" ]; then
 
   # delete the git repo that the theme came with
   rm -rf wp-content/themes/$project/.git
-
-  # let's clear out some of the pre-packaged themes
-  rm -rf wp-content/themes/twentyten
-  rm -rf wp-content/themes/twentyeleven
-  rm -rf wp-content/themes/twentytwelve
 fi
 
+# let's clear out some of the pre-packaged themes
+rm -rf wp-content/themes/twentytwelve
+rm -rf wp-content/themes/twentythirteen
+rm -rf wp-content/themes/twentyfourteen
 
 echo '------------------------------------------------------------------------'
 echo '---> THEME INSTALLED'
